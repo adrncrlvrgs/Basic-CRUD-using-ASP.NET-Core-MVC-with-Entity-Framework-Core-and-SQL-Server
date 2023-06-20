@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
+
+    body {
+        background-image: url("https://wallpapercave.com/dwp2x/wp2445774.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .gray-hover:hover {
+        color: gray;
+    }
+
+</style>
+<div class="center-container">
+<div class="text-center">
+    <h1 class="display-4">Simple CRUD</h1>
+
+    <p>By: Adrian Carl Vargas | CS-601</p>
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+                    <a class="btn btn-link text-dark text-decoration-none hover nav-link text-dark gray-hover" asp-area="" asp-controller="Employees" asp-action="Add" style="border-color:azure; background-color:#E2EDF1; align-items:center;">
+                        <p style="padding-left:5px;padding-right:5px; margin-bottom:0;">Start by addding Employee</p></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+

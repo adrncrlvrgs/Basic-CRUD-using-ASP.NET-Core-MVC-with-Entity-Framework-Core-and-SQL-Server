@@ -1,0 +1,58 @@
+﻿@model List<BasicCrud_Vargas_Adrian.Models.Domain.Employee>
+
+@{
+}
+<style>
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
+
+    body {
+        background-image: url("https://wallpapercave.com/dwp2x/wp7728127.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+</style>
+
+<div class="center-container">
+    <div class="card">
+        <div class="card-body shadow">
+            <h1>Employees</h1>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead style="text-align:center;">
+                        <tr>
+                            <th>Id</th>
+                            <th>Full Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Email</th>
+                            <th>Contact Number</th>
+                            <th>Address</th>
+                            <th>@($"   ")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var employee in Model)
+                        {
+                            <tr>
+                                <td>@employee.Id.ToString().Substring(0, 6)</td>
+                                <td>@($"{employee.Firstname} {employee.Middlename} {employee.Lastname}")</td>
+                                <td>@employee.Age</td>
+                                <td>@employee.Gender</td>
+                                <td>@employee.Email</td>
+                                <td>@employee.ContactNum</td>
+                                <td>@employee.Address</td>
+                                <td><a class="btn btn-link text-dark text-decoration-none hover" href="Employees/View/@employee.Id" style="background-color:#106399;"><p style="color:white;margin:0px;">Action</p></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+</div>

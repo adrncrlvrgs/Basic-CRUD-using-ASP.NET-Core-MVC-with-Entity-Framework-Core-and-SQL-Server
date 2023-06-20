@@ -1,0 +1,161 @@
+﻿@model BasicCrud_Vargas_Adrian.Models.AddEmployeeViewModel
+
+@{
+}
+
+<style>
+    .required::after {
+        content: ' *';
+        color: red;
+    }
+
+    hr {
+        border: none;
+        height: 3px;
+        color: #333; 
+        background-color: #333; 
+    }
+
+    body {
+        background-image: url("https://wallpapercave.com/dwp2x/wp7728113.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card" style="border:none;background: linear-gradient(24deg, rgba(108,176,230,1) 3%, rgba(204,231,255,1) 32%, rgba(255,255,255,1) 66%);">
+                <div class="card-body rounded-3 shadow">
+                    <h2 class="card-title text-center mb-5 display-6">Employee form</h2>
+                    <p class=" text-center" style="font-size:11px;"><em>Note: Make sure to fill all the required fields.</em></p>
+                    <form method="post" class="needs-validation" action="Add" >
+                        <div class="col">
+                            <strong style="padding-left: 15px">Personal Information</strong>
+                            <div class="row justify-content-between m-1">
+                                <div class="form-group" style="width:30%;">
+                                    <label class="required form-label" for="">Last Name</label>
+                                    <input type="text" class="form-control" asp-for="Lastname" placeholder="Enter your Last name" required>
+                                    <div class="invalid-feedback">
+                                        Please enter your lastname.
+                                    </div>
+                                </div>
+                                <div class="form-group" style="width:30%;">
+                                    <label class="required form-label" for="">First Name</label>
+                                    <input type="text" class="form-control" asp-for="Firstname" placeholder="Enter your First name" required>
+                                    <div class="invalid-feedback">
+                                        Please enter your lastname.
+                                    </div>
+                                </div>
+                                <div class="form-group" style="width:30%;">
+                                    <label class="form-label" for="">Middle Name</label>
+                                    <input type="text" class="form-control" asp-for="Middlename">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col" style="padding: 15px; margin: 0px">
+                            <div class="row border-right" >
+                                <div class="form-group" style="width:30%";>
+                                        <label class="required form-label" for="">Gender</label>
+                                        <select class="form-control" asp-for="Gender" required>
+                                            <option value="" disabled selected>Select Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Others">LGBTQ+</option>
+
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select
+                                        </div>
+                                </div>
+                                    <div class="form-group" style="width:30%;">
+                                        <label class="required form-label" for="">Age</label>
+                                        <input type="number" class="form-control" asp-for="Age" placeholder="Enter your Age" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your age.
+                                        </div>
+                                    </div>
+
+                                </div>
+                              </div>
+                                <hr />
+
+                            <div class="col" style="padding: 15px; margin: 0px">
+                                    <strong>Contact Informations</strong>
+                                    <div class="form-group" style="width:30%">
+                                        <label class="required form-label" for="">Email Address</label>
+                                        <input type="email" class="form-control" asp-for="Email" placeholder="Enter your E-mail" required>
+                                        <div class="invalid-feedback">
+                                            Please enter email
+                                        </div>
+                                    </div>
+                                <div class="form-group" style="width:30%">
+                                    <label class="required form-label" for="">Contact Number</label>
+                                    <input type="number" class="form-control" asp-for="ContactNum" placeholder="Enter Contact Number" required>
+                                    <div class="invalid-feedback">
+                                        Please enter contact number
+                                    </div>
+                                </div>
+                                <div class="form-group" style="width:30%">
+                                    <label class="required form-label" for="">Address</label>
+                                    <input type="text" class="form-control" asp-for="Address" placeholder="Enter Address" required>
+                                    <div class="invalid-feedback">
+                                        Please enter contact Address
+                                    </div>
+                                </div>
+            
+                                 
+                            <div class="form-group text-center mt-4">
+                                <button type="submit" class="btn btn-submit btn-lg" style="background-color: #1E588F; border-color: #1E588F; color: white; width: 30% ">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+    <div id="employeeToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Employee Form</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Employee form submitted successfully!
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+    <div id="employeeToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" >
+        <div class="toast-header">
+            <strong class="me-auto">Employee Form</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Employee form submitted successfully!
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementsByTagName('button').addEventListener('click', function (event) {
+        event.preventDefault();
+
+        var toast = new bootstrap.Toast(document.getElementById('employeeToast'));
+        toast.show();
+
+        setTimeout(function () {
+            toast.hide();
+        }, 3000); // Dismiss after 3 seconds
+
+        this.reset();
+    });
+</script>

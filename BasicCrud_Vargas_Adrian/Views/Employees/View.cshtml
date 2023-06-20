@@ -1,0 +1,207 @@
+﻿@model BasicCrud_Vargas_Adrian.Models.UpdateEmployeeViewModel
+    
+@{
+}
+
+<style>
+    
+    hr {
+        border: none;
+        height: 3px;
+        color: #333;
+        background-color: #333;
+    }
+
+    body {
+        background-image: url("https://wallpapercave.com/dwp2x/wp7728194.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card" style="border-radius: 10px;">
+                <div class="card-body shadow">
+                    <h1 class="p-2">Edit Employee</h1>
+                    <form method="post" class="needs-validation" action="View">
+                        <div class="col">
+                            <strong style="padding-left: 15px">Personal Information</strong>
+                            <div class="form-group" style="width:30%;">
+                                <label class="form-label" for="">ID</label>
+                                <input type="text" class="form-control" asp-for="Id" readonly>
+                    
+                            </div>
+                            <div class="row justify-content-between m-1">
+                                <div class="form-group" style="width:30%;">
+                                    <label class="form-label" for="">Last Name</label>
+                                    <input type="text" class="form-control" asp-for="Lastname" placeholder="Enter your Last name" required>
+                                    <div class="invalid-feedback">
+                                        Please enter your lastname.
+                                    </div>
+                                </div>
+                                <div class="form-group" style="width:30%;">
+                                    <label class="form-label" for="">First Name</label>
+                                    <input type="text" class="form-control" asp-for="Firstname" placeholder="Enter your First name" required>
+                                    <div class="invalid-feedback">
+                                        Please enter your lastname.
+                                    </div>
+                                </div>
+                                <div class="form-group" style="width:30%;">
+                                    <label class="form-label" for="">Middle Name</label>
+                                    <input type="text" class="form-control" asp-for="Middlename">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col" style="padding: 15px; margin: 0px">
+                            <div class="row border-right">
+                                <div class="form-group" style="width:30%" ;>
+                                    <label class="form-label" for="">Gender</label>
+                                    <select class="form-control" asp-for="Gender" required>
+                                        <option value="" disabled selected>Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Others">LGBTQ+</option>
+
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select
+                                    </div>
+                                </div>
+                                <div class="form-group" style="width:30%;">
+                                    <label class="form-label" for="">Age</label>
+                                    <input type="number" class="form-control" asp-for="Age" placeholder="Enter your Age" required>
+                                    <div class="invalid-feedback">
+                                        Please enter your age.
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr />
+
+                            <div class="col" style="display:grid">
+                                <strong>Contact Informations</strong>
+                                <div class="form-group" style="width:30%">
+                                    <label class="form-label" for="">Email Address</label>
+                                    <input type="email" class="form-control" asp-for="Email" placeholder="Enter your E-mail" required>
+                                    <div class="invalid-feedback">
+                                        Please enter email
+                                    </div>
+                                </div>
+                                <div class="form-group" style="width:30%">
+                                    <label class="form-label" for="">Contact Number</label>
+                                    <input type="number" class="form-control" asp-for="ContactNum" placeholder="Enter Contact Number" required>
+                                    <div class="invalid-feedback">
+                                        Please enter contact number
+                                    </div>
+                                </div>
+                                <div class="form-group" style="width:30%">
+                                    <label class="form-label" for="">Address</label>
+                                    <input type="text" class="form-control" asp-for="Address" placeholder="Enter Address" required>
+                                    <div class="invalid-feedback">
+                                        Please enter contact Address
+                                    </div>
+                                </div>
+
+                                <div class="col-12 form-group text-center mt-4" style="align-items:center;" >
+                                    <button id="updateButton" type="submit" class="btn btn-submit" style="background-color: #1FD01B; border-color: #22A11F; color: white; width: 25%;" disabled>Update</button>
+                                    <button id="deleteButton" type="submit" class="btn btn-danger" style="border-color: #A11F21; color: white; width: 25%;"
+                                            asp-action="Delete" asp-controller="Employees">Delete</button>
+                                </div>
+
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var updateButton = document.getElementById('updateButton');
+        var inputs = document.querySelectorAll('input, select');
+        var initialValues = {};
+
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            initialValues[input.name] = input.value;
+            input.addEventListener('input', function () {
+                updateButton.disabled = isUnchanged(initialValues);
+            });
+        }
+
+        function isUnchanged(initialValues) {
+            for (var name in initialValues) {
+                if (initialValues.hasOwnProperty(name) && initialValues[name] !== document.querySelector('[name="' + name + '"]').value) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Existing code...
+
+        // Show a Bootstrap toast with the given message
+        function showToast(message) {
+            var toastContainer = document.querySelector('.toast-container');
+
+            var toast = document.createElement('div');
+            toast.classList.add('toast');
+            toast.classList.add('show');
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+
+            var toastHeader = document.createElement('div');
+            toastHeader.classList.add('toast-header');
+
+            var toastTitle = document.createElement('strong');
+            toastTitle.classList.add('me-auto');
+            toastTitle.innerText = 'Notification';
+
+            var toastCloseButton = document.createElement('button');
+            toastCloseButton.setAttribute('type', 'button');
+            toastCloseButton.classList.add('btn-close');
+            toastCloseButton.setAttribute('data-bs-dismiss', 'toast');
+            toastCloseButton.setAttribute('aria-label', 'Close');
+
+            var toastBody = document.createElement('div');
+            toastBody.classList.add('toast-body');
+            toastBody.innerText = message;
+
+            toastHeader.appendChild(toastTitle);
+            toastHeader.appendChild(toastCloseButton);
+            toast.appendChild(toastHeader);
+            toast.appendChild(toastBody);
+            toastContainer.appendChild(toast);
+
+            var bootstrapToast = new bootstrap.Toast(toast);
+            bootstrapToast.show();
+
+            setTimeout(function () {
+                toastContainer.removeChild(toast);
+            }, 3000);
+        }
+
+        var updateButton = document.getElementById('updateButton');
+        var deleteButton = document.getElementById('deleteButton');
+
+        updateButton.addEventListener('click', function () {
+            showToast('Employee updated successfully!');
+        });
+
+        deleteButton.addEventListener('click', function () {
+            showToast('Employee deleted successfully!');
+        });
+    });
+
+</script>
+
